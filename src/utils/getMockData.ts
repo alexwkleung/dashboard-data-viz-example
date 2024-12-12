@@ -1,7 +1,5 @@
 import { mock } from '../data/mock';
 
-import type { MockData } from '../data/mock';
-
 /**
  * Get total mock data entries
  *
