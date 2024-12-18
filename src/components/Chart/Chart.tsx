@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import { CircularProgress } from '@mui/material';
+import { chartOptions } from '../../data/chart-options';
 
 import './Chart.css';
 
@@ -11,30 +12,7 @@ const Chart = () => {
     // simulate fetch
     try {
       setTimeout(() => {
-        const columnChart: Highcharts.Options = {
-          chart: {
-            type: 'column',
-          },
-          title: {
-            text: 'Column Chart',
-          },
-          xAxis: {
-            categories: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
-          },
-          yAxis: {
-            title: {
-              text: 'Value',
-            },
-          },
-          series: [
-            {
-              data: [6, 2, 2, 2],
-            },
-          ] as Highcharts.SeriesOptionsType[],
-          accessibility: {
-            enabled: true,
-          },
-        };
+        const columnChart: Highcharts.Options = chartOptions();
 
         Highcharts.chart('chart1', columnChart);
       }, 1100);

@@ -13,7 +13,9 @@ const TabNavigation = () => {
                 <NavLink
                   to="/"
                   className={
-                    (locationPath === '/' ? 'border-gray-500 text-gray-700' : 'text-gray-700') +
+                    (locationPath === '/'
+                      ? 'border-gray-500 bg-gray-100 text-gray-700'
+                      : 'border-gray-300 text-gray-700') +
                     ' block rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700'
                   }
                 >
@@ -27,7 +29,7 @@ const TabNavigation = () => {
                   className={
                     (locationPath === '/tab-2'
                       ? 'border-gray-500 text-gray-700'
-                      : 'text-gray-700') +
+                      : 'border-gray-300 text-gray-700') +
                     ' block rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700'
                   }
                 >
