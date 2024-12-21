@@ -30,18 +30,16 @@ const Chart = () => {
   }, [isLoading]);
 
   return (
-    <>
-      <div className="chart-container-root mt-10">
-        <div className="chart1-container">
-          {isLoading && (
-            <div className="flex h-full items-center justify-center">
-              <CircularProgress />
-            </div>
-          )}
-          <div className="chart-container" id="chart1"></div>
-        </div>
+    <div className="chart-container-root mt-10">
+      <div className="chart1-container">
+        {isLoading && (
+          <div className="flex h-full items-center justify-center">
+            <CircularProgress />
+          </div>
+        )}
+        <div className="chart-container" id="chart1"></div>
       </div>
-    </>
+    </div>
   );
 };
 

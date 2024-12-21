@@ -6,7 +6,7 @@ const DataGridTable = () => {
   return (
     <Box>
       <DataGrid
-        sx={{ width: '75%', margin: 'auto' }}
+        sx={{ width: '90%', margin: 'auto' }}
         rows={gridTable.rows}
         columns={gridTable.columns}
         initialState={{

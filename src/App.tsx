@@ -5,14 +5,12 @@ import './App.css';
 
 function App() {
   return (
-    <>
-      <div className="flex">
-        <TabNavigation />
-        <div className="flex-1">
-          <Dashboard />
-        </div>
+    <div className="flex">
+      <TabNavigation />
+      <div className="flex-1">
+        <Dashboard />
       </div>
-    </>
+    </div>
   );
 }
 

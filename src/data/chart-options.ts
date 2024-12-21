@@ -1,4 +1,4 @@
-import { getTotalStatus } from '../utils/getMockData';
+import { getTotalStatus } from '../utils/get-mock-data';
 
 import type { Options, SeriesOptionsType } from 'highcharts';
 
