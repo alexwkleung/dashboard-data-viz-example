@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DateRangeContext } from '../providers/DateRangeProvider';
+import { DateRangeContext } from '../contexts/DateRangeContext';
 
 /**
  * Use date range hook
