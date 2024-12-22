@@ -1,21 +1,14 @@
-import { createContext, PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
+import { DateRangeContext } from '../contexts/DateRangeContext';
 import dayjs from 'dayjs';
 
-import type { DateRange, DateRangeContextProps } from '../types/daterange';
+import type { DateRange } from '../types/daterange';
 
 // start of year
 const startOfYear: string = dayjs().startOf('year').format('YYYY-MM-DD');
 
 // end of year
 const endOfYear: string = dayjs().endOf('year').format('YYYY-MM-DD').toString();
-
-export const DateRangeContext = createContext<DateRangeContextProps>({
-  date: {
-    startDate: '',
-    endDate: '',
-  },
-  setDate: (): void => {},
-});
 
 /**
  * Provider for date range

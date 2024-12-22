@@ -2,7 +2,7 @@ import Chart from '../Chart/Chart';
 import CardStatistics from '../CardStatistics/CardStatistics';
 import DataGridTable from '../DataGridTable/DataGridTable';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
-import { DateRangeProvider } from '../../ContextProviders/DateRangeProvider';
+import { DateRangeProvider } from '../../providers/DateRangeProvider';
 
 import './Dashboard.css';
 
