@@ -22,7 +22,7 @@ const TabNavigation = () => {
               </NavLink>
             </li>
 
-            <li>
+            <li className="pt-2">
               <NavLink
                 to="/tab-2"
                 className={
