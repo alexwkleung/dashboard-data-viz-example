@@ -14,7 +14,10 @@ const Chart = () => {
       setTimeout(() => {
         const columnChart: Highcharts.Options = chartOptions();
 
-        Highcharts.chart('chart1', columnChart);
+        // check if the element exists/is mounted before rendering
+        if (document.getElementById('chart1')) {
+          Highcharts.chart('chart1', columnChart);
+        }
       }, 1100);
       // catch any thrown errors
     } catch (err) {

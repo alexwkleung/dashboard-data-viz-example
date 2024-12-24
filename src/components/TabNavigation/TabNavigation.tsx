@@ -1,7 +1,24 @@
 import { NavLink, useLocation } from 'react-router';
+import { useEffect } from 'react';
 
-const TabNavigation = () => {
+import type { PropsWithChildren } from 'react';
+
+const Tabs = () => {
   const locationPath: string = useLocation().pathname;
+
+  useEffect(() => {
+    // change title based on the current location path
+    switch (locationPath) {
+      case '/':
+        document.title = 'Dashboard | Dashboard Data Visualization Template';
+        break;
+      case '/tab-2':
+        document.title = 'Tab 2 | Dashboard Data Visualization Template';
+        break;
+      default:
+        document.title = 'Dashboard Data Visualization Template';
+    }
+  }, [locationPath]);
 
   return (
     <div>
@@ -38,6 +55,15 @@ const TabNavigation = () => {
           </ul>
         </div>
       </div>
+    </div>
+  );
+};
+
+const TabNavigation = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="flex">
+      <Tabs />
+      <div className="flex-1">{children}</div>
     </div>
   );
 };
