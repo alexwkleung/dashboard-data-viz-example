@@ -1,17 +1,7 @@
-import type { Status } from '../types/status';
-
-// structure of mock data
-export interface MockData {
-  id: number;
-  title: string;
-  description: string;
-  dateCreated: string;
-  status: Status;
-  comments: string;
-}
+import type { MockData } from '../types/mockdata';
 
 // mock data
-export const mock: MockData[] = [
+export const mockData: MockData[] = [
   {
     id: 1,
     title: 'Set 1',

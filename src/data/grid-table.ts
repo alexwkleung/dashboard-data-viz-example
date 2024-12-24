@@ -1,5 +1,5 @@
 import { GridColDef } from '@mui/x-data-grid';
-import { mock } from './mock';
+import { mockData } from './data';
 
 export interface GridTable {
   rows: {
@@ -24,7 +24,7 @@ export interface GridTable {
  * @returns Generated rows for grid table
  */
 function generateRows(): GridTable['rows'] {
-  return mock.map((data) => {
+  return mockData.map((data) => {
     return {
       id: data.id,
       Title: data.title,

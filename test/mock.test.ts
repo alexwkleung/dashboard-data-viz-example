@@ -1,12 +1,12 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
-import { mock } from '../src/data/mock';
+import { mockData } from '../src/data/data';
 
-import type { MockData } from '../src/data/mock';
+import type { MockData } from '../src/types/mockdata';
 
 describe('Mock Data', () => {
   it('should be defined and match the correct type', () => {
-    expect(mock).toBeDefined();
+    expect(mockData).toBeDefined();
 
-    expectTypeOf(mock).toMatchTypeOf<MockData[]>();
+    expectTypeOf(mockData).toMatchTypeOf<MockData[]>();
   });
 });

@@ -1,4 +1,4 @@
-import { mock } from '../data/mock';
+import { mockData } from '../data/data';
 
 import type { Status } from '../types/status';
 
@@ -8,13 +8,13 @@ import type { Status } from '../types/status';
  * @returns Total number of mock data entries
  */
 export function getTotalMockData(): number {
-  return mock?.length;
+  return mockData?.length;
 }
 
 export function getTotalStatus(status: Status): number {
   let statusCount: number = 0;
 
-  mock.map((data) => {
+  mockData.map((data) => {
     if (data.status === status) {
       statusCount++;
     }
