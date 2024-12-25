@@ -30,7 +30,7 @@ const Chart = () => {
         setIsLoading(false);
       }, 1100);
     };
-  }, [isLoading]);
+  }, []);
 
   return (
     <div className="chart-container-root mt-10">
