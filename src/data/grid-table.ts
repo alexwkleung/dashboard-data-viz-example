@@ -1,22 +1,5 @@
-import { GridColDef } from '@mui/x-data-grid';
 import { mockData } from './data';
-
-export interface GridTable {
-  rows: {
-    id: number;
-    Title: string;
-    Description: string;
-    DateCreated: string;
-    Comments: string;
-  }[];
-  columns: GridColDef<{
-    id: number;
-    Title: string;
-    Description: string;
-    DateCreated: string;
-    Comments: string;
-  }>[];
-}
+import type { GridTable } from '../types/gridtable';
 
 /**
  * Generate rows
