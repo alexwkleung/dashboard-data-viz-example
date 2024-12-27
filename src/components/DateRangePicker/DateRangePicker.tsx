@@ -11,17 +11,18 @@ const DateRangePicker = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box className="ml-5 pt-6">
-        <DatePicker
-          sx={{ paddingRight: '10px' }}
-          label="Start Date"
-          value={dayjs(date.startDate)}
-          onChange={(prev) => setDate({ ...date, startDate: prev!.format('YYYY-MM-DD') })}
-        />
-        <DatePicker
-          label="End Date"
-          value={dayjs(date.endDate)}
-          onChange={(prev) => setDate({ ...date, endDate: prev!.format('YYYY-MM-DD') })}
-        />
+        <Box sx={{ display: 'flex', gap: '12px' }}>
+          <DatePicker
+            label="Start Date"
+            value={dayjs(date.startDate)}
+            onChange={(prev) => setDate({ ...date, startDate: prev!.format('YYYY-MM-DD') })}
+          />
+          <DatePicker
+            label="End Date"
+            value={dayjs(date.endDate)}
+            onChange={(prev) => setDate({ ...date, endDate: prev!.format('YYYY-MM-DD') })}
+          />
+        </Box>
       </Box>
     </LocalizationProvider>
   );
