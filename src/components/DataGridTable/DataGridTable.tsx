@@ -17,20 +17,34 @@ const DataGridTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      // filter rows based on date range
-      const filtered: GridTable['rows'] = gridTable.rows.filter((field) =>
-        isBetween(dayjs(field.DateCreated), dayjs(date.startDate), dayjs(date.endDate))
-      );
+    let isMounted: boolean = true;
 
-      setFilterRows(filtered);
-    }, 500);
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1100));
+
+        if (!isMounted) return;
+
+        // filter rows based on date range
+        const filtered: GridTable['rows'] = gridTable.rows.filter((field) =>
+          isBetween(dayjs(field.DateCreated), dayjs(date.startDate), dayjs(date.endDate))
+        );
+
+        setFilterRows(filtered);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchData();
 
     // clean up
     return () => {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1100);
+      isMounted = false;
     };
   }, [date]);
 

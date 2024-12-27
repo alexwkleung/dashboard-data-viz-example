@@ -1,36 +1,96 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import { CircularProgress } from '@mui/material';
-import { chartOptions } from '../../data/chart-options';
+import { getTotalStatus } from '../../utils/get-mock-data';
+import { useDateRange } from '../../hooks/useDateRange';
+import dayjs from 'dayjs';
+
+import type { Options, SeriesOptionsType } from 'highcharts';
+import type { TotalStatus } from '../../types/status';
 
 import './Chart.css';
 
 const Chart = () => {
   const [isLoading, setIsLoading] = useState(true);
 
+  const { date } = useDateRange();
+
   useEffect(() => {
-    // simulate fetch
-    try {
-      setTimeout(() => {
+    let isMounted: boolean = true;
+
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1100));
+
+        if (!isMounted) return;
+
+        const chartTitle: string = 'Status Totals';
+        const chartCategoriesX: string[] = ['Open', 'Closed', 'In Progress'];
+        const chartTitleY: string = 'Total';
+
+        const totalStatus: TotalStatus = getTotalStatus(dayjs(date.startDate), dayjs(date.endDate));
+
+        const chartSeries: SeriesOptionsType[] = [
+          {
+            data: [
+              {
+                y: totalStatus.Open,
+                color: '#DEC5E3',
+              },
+              {
+                y: totalStatus.Closed,
+                color: '#81F7E5',
+              },
+              {
+                y: totalStatus['In Progress'],
+                color: '#B6DCFE',
+              },
+            ],
+          },
+        ] as SeriesOptionsType[];
+
+        const chartOptions = (): Options => ({
+          chart: {
+            type: 'column',
+          },
+          title: {
+            text: chartTitle,
+          },
+          xAxis: {
+            categories: chartCategoriesX,
+          },
+          yAxis: {
+            title: {
+              text: chartTitleY,
+            },
+          },
+          series: chartSeries,
+          accessibility: {
+            enabled: true,
+          },
+          colors: ['#000000'],
+        });
+
         const columnChart: Highcharts.Options = chartOptions();
 
-        // check if the element exists/is mounted before rendering
-        if (document.getElementById('chart1')) {
+        if (isMounted && document.getElementById('chart1')) {
           Highcharts.chart('chart1', columnChart);
         }
-      }, 1100);
-      // catch any thrown errors
-    } catch (err) {
-      console.error(err);
-    }
-
-    // clean up
-    return () => {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1100);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
     };
-  }, []);
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [date.startDate, date.endDate]);
 
   return (
     <div className="chart-container-root mt-10">
