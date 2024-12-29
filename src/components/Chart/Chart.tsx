@@ -4,6 +4,7 @@ import { CircularProgress } from '@mui/material';
 import { getTotalStatus } from '../../utils/get-mock-data';
 import { useDateRange } from '../../hooks/useDateRange';
 import dayjs from 'dayjs';
+import { mockFetch } from '../../utils/mock-fetch';
 
 import type { Options, SeriesOptionsType } from 'highcharts';
 import type { TotalStatus } from '../../types/status';
@@ -20,7 +21,7 @@ const Chart = () => {
 
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1100));
+        await mockFetch(1100);
 
         if (!isMounted) return;
 

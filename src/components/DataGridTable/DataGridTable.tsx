@@ -6,6 +6,7 @@ import { useDateRange } from '../../hooks/useDateRange';
 import { isBetween } from '../../utils/is-between';
 import dayjs from 'dayjs';
 import { CircularProgress } from '@mui/material';
+import { mockFetch } from '../../utils/mock-fetch';
 
 import type { GridTable } from '../../types/gridtable';
 
@@ -21,7 +22,7 @@ const DataGridTable = () => {
 
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1100));
+        await mockFetch(1100);
 
         if (!isMounted) return;
 
