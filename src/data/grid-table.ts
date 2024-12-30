@@ -1,4 +1,6 @@
-import { mockData } from './data';
+import { parseMockFetch } from '../utils/mock-fetch';
+
+import type { MockData } from '../types/mockdata';
 import type { GridTable } from '../types/gridtable';
 
 /**
@@ -6,16 +8,23 @@ import type { GridTable } from '../types/gridtable';
  *
  * @returns Generated rows for grid table
  */
-function generateRows(): GridTable['rows'] {
-  return mockData.map((data) => {
-    return {
-      id: data.id,
-      Title: data.title,
-      Description: data.description,
-      DateCreated: data.dateCreated,
-      Comments: data.comments,
-    };
-  });
+async function generateRows(): Promise<GridTable['rows']> {
+  const data: MockData[] = await parseMockFetch();
+
+  const parse: GridTable['rows'] = [];
+
+  for (const obj in data) {
+    parse.push({
+      id: data[obj].id,
+      title: data[obj].title,
+      description: data[obj].description,
+      dateCreated: data[obj].dateCreated,
+      status: data[obj].status,
+      comments: data[obj].comments,
+    });
+  }
+
+  return parse;
 }
 
 /**
@@ -27,25 +36,31 @@ function generateColumns(): GridTable['columns'] {
   return [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: 'Title',
+      field: 'title',
       headerName: 'Title',
       width: 150,
       editable: false,
     },
     {
-      field: 'Description',
+      field: 'description',
       headerName: 'Description',
       width: 150,
       editable: false,
     },
     {
-      field: 'DateCreated',
+      field: 'dateCreated',
       headerName: 'Date Created',
       width: 150,
       editable: false,
     },
     {
-      field: 'Comments',
+      field: 'status',
+      headerName: 'Status',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'comments',
       headerName: 'Comments',
       width: 150,
       editable: false,
@@ -58,7 +73,14 @@ function generateColumns(): GridTable['columns'] {
  *
  * Holds the rows and columns for the grid table
  */
-export const gridTable: GridTable = {
-  rows: generateRows(),
-  columns: generateColumns(),
+// export const gridTable: GridTable = {
+//   rows: await generateRows(),
+//   columns: generateColumns(),
+// };
+
+export const gridTable = async (): Promise<GridTable> => {
+  return {
+    rows: await generateRows(),
+    columns: generateColumns(),
+  };
 };

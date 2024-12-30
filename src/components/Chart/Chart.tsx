@@ -4,7 +4,7 @@ import { CircularProgress } from '@mui/material';
 import { getTotalStatus } from '../../utils/get-mock-data';
 import { useDateRange } from '../../hooks/useDateRange';
 import dayjs from 'dayjs';
-import { mockFetch } from '../../utils/mock-fetch';
+import { mockFetchDelay } from '../../utils/mock-fetch';
 
 import type { Options, SeriesOptionsType } from 'highcharts';
 import type { TotalStatus } from '../../types/status';
@@ -19,9 +19,10 @@ const Chart = () => {
   useEffect(() => {
     let isMounted: boolean = true;
 
-    const fetchData = async () => {
+    // fetch chart data
+    const fetchChartData = async (): Promise<void> => {
       try {
-        await mockFetch(1100);
+        await mockFetchDelay(1000);
 
         if (!isMounted) return;
 
@@ -29,7 +30,10 @@ const Chart = () => {
         const chartCategoriesX: string[] = ['Open', 'Closed', 'In Progress'];
         const chartTitleY: string = 'Total';
 
-        const totalStatus: TotalStatus = getTotalStatus(dayjs(date.startDate), dayjs(date.endDate));
+        const totalStatus: TotalStatus = await getTotalStatus(
+          dayjs(date.startDate),
+          dayjs(date.endDate)
+        );
 
         const chartSeries: SeriesOptionsType[] = [
           {
@@ -86,7 +90,7 @@ const Chart = () => {
       }
     };
 
-    fetchData();
+    fetchChartData();
 
     return () => {
       isMounted = false;

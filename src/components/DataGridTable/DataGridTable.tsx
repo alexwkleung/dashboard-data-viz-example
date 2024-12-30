@@ -6,7 +6,8 @@ import { useDateRange } from '../../hooks/useDateRange';
 import { isBetween } from '../../utils/is-between';
 import dayjs from 'dayjs';
 import { CircularProgress } from '@mui/material';
-import { mockFetch } from '../../utils/mock-fetch';
+import { mockFetchDelay } from '../../utils/mock-fetch';
+import { Typography } from '@mui/material';
 
 import type { GridTable } from '../../types/gridtable';
 
@@ -15,23 +16,32 @@ const DataGridTable = () => {
 
   const [filterRows, setFilterRows] = useState<GridTable['rows']>();
 
+  const [gridTableData, setGridTableData] = useState<GridTable>();
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let isMounted: boolean = true;
 
-    const fetchData = async () => {
+    // fetch table data
+    const fetchTableData = async (): Promise<void> => {
       try {
-        await mockFetch(1100);
+        await mockFetchDelay(1000);
+
+        const data: GridTable = await gridTable();
+
+        setGridTableData(data);
 
         if (!isMounted) return;
 
-        // filter rows based on date range
-        const filtered: GridTable['rows'] = gridTable.rows.filter((field) =>
-          isBetween(dayjs(field.DateCreated), dayjs(date.startDate), dayjs(date.endDate))
-        );
+        if (data && data.rows) {
+          // filter rows based on date range
+          const filtered: GridTable['rows'] = data.rows.filter((field) =>
+            isBetween(dayjs(field.dateCreated), dayjs(date.startDate), dayjs(date.endDate))
+          );
 
-        setFilterRows(filtered);
+          setFilterRows(filtered);
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -41,7 +51,7 @@ const DataGridTable = () => {
       }
     };
 
-    fetchData();
+    fetchTableData();
 
     // clean up
     return () => {
@@ -55,11 +65,11 @@ const DataGridTable = () => {
         <div className="flex h-full items-center justify-center">
           <CircularProgress />
         </div>
-      ) : (
+      ) : gridTableData && gridTableData.columns && filterRows ? (
         <DataGrid
           sx={{ width: '90%', margin: 'auto' }}
           rows={filterRows}
-          columns={gridTable.columns}
+          columns={gridTableData.columns}
           initialState={{
             pagination: {
               paginationModel: {
@@ -71,6 +81,10 @@ const DataGridTable = () => {
           checkboxSelection
           disableRowSelectionOnClick
         />
+      ) : (
+        <div className="flex h-full items-center justify-center">
+          <Typography>No table data available</Typography>
+        </div>
       )}
     </Box>
   );
