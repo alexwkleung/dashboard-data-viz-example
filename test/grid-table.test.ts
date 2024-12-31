@@ -4,8 +4,10 @@ import { gridTable } from '../src/data/grid-table';
 import type { GridTable } from '../src/types/gridtable';
 
 describe('Grid table', () => {
-  it('should be defined and match the correct type', () => {
-    expect(gridTable).toBeDefined();
-    expectTypeOf(gridTable).toMatchTypeOf<GridTable>();
+  it('should be defined and match the correct type', async () => {
+    const grid: GridTable = await gridTable();
+
+    expect(grid).toBeDefined();
+    expectTypeOf(grid).toMatchTypeOf<GridTable>();
   });
 });
