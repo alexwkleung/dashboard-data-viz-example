@@ -71,13 +71,8 @@ function generateColumns(): GridTable['columns'] {
 /**
  * Grid table object
  *
- * Holds the rows and columns for the grid table
+ * @returns Grid table object containing row and column values
  */
-// export const gridTable: GridTable = {
-//   rows: await generateRows(),
-//   columns: generateColumns(),
-// };
-
 export const gridTable = async (): Promise<GridTable> => {
   return {
     rows: await generateRows(),
