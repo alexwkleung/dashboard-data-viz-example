@@ -4,6 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useDateRange } from '../../hooks/useDateRange';
 import dayjs from 'dayjs';
+import { DATE_FORMAT } from '../../constants/date-format';
 
 const DateRangePicker = () => {
   const { date, setDate } = useDateRange();
@@ -15,12 +16,14 @@ const DateRangePicker = () => {
           <DatePicker
             label="Start Date"
             value={dayjs(date.startDate)}
-            onChange={(prev) => setDate({ ...date, startDate: prev!.format('YYYY-MM-DD') })}
+            onChange={(prev) => setDate({ ...date, startDate: prev!.format(DATE_FORMAT.default) })}
+            format={DATE_FORMAT.default}
           />
           <DatePicker
             label="End Date"
             value={dayjs(date.endDate)}
-            onChange={(prev) => setDate({ ...date, endDate: prev!.format('YYYY-MM-DD') })}
+            onChange={(prev) => setDate({ ...date, endDate: prev!.format(DATE_FORMAT.default) })}
+            format={DATE_FORMAT.default}
           />
         </Box>
       </Box>

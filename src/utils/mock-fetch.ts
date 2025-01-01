@@ -27,7 +27,7 @@ export const mockFetch = async (url: string): Promise<Response> => {
 
   const data = {
     'http://localhost:5173/': {
-      ...mockData,
+      ...mockData(),
     },
   };
 

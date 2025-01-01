@@ -5,8 +5,8 @@ import type { MockData } from '../src/types/mockdata';
 
 describe('Mock Data', () => {
   it('should be defined and match the correct type', () => {
-    expect(mockData).toBeDefined();
+    expect(mockData()).toBeDefined();
 
-    expectTypeOf(mockData).toMatchTypeOf<MockData[]>();
+    expectTypeOf(mockData()).toMatchTypeOf<MockData[] | undefined>();
   });
 });
