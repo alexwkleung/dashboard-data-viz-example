@@ -4,7 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useDateRange } from '../../hooks/useDateRange';
 import dayjs from 'dayjs';
-import { DATE_FORMAT } from '../../constants/date-format';
+import { DATE_FORMAT } from '../../constants/date';
 
 const DateRangePicker = () => {
   const { date, setDate } = useDateRange();

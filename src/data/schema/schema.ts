@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import dayjs from 'dayjs';
-import { DATE_FORMAT } from '../../constants/date-format';
+import { DATE_FORMAT } from '../../constants/date';
 
 import type { Status } from '../../types/status';
 import type { Dayjs } from 'dayjs';
