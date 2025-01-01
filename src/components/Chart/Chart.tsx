@@ -8,6 +8,7 @@ import { mockFetchDelay } from '../../utils/mock-fetch';
 
 import type { Options, SeriesOptionsType } from 'highcharts';
 import type { TotalStatus } from '../../types/status';
+import type { Status } from '../../types/status';
 
 import './Chart.css';
 
@@ -27,7 +28,7 @@ const Chart = () => {
         if (!isMounted) return;
 
         const chartTitle: string = 'Status Totals';
-        const chartCategoriesX: string[] = ['Open', 'Closed', 'In Progress'];
+        const chartCategoriesX: Status[] = ['Open', 'Closed', 'In Progress'];
         const chartTitleY: string = 'Total';
 
         const totalStatus: TotalStatus = await getTotalStatus(
