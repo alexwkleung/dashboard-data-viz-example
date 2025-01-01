@@ -40,8 +40,7 @@ const schema: z.ZodObject<ZObjectSchemaType> = z.object({
       return parsed.isValid() && parsed.format(DATE_FORMAT.default) === date;
     },
     {
-      message:
-        'Date format is invalid. The default date format is: ' + DATE_FORMAT.default.toString(),
+      message: 'Date format is invalid. The default date format is: ' + DATE_FORMAT.default,
     }
   ),
   status: statusSchema,
