@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { getTotalStatus } from '../../utils/get-mock-data';
 import { useDateRange } from '../../hooks/useDateRange';
 import dayjs from 'dayjs';
@@ -14,6 +14,8 @@ import './Chart.css';
 
 const Chart = () => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const [hasChartSeriesData, setHasChartSeriesData] = useState(false);
 
   const { date } = useDateRange();
 
@@ -79,6 +81,12 @@ const Chart = () => {
 
         const columnChart: Highcharts.Options = chartOptions();
 
+        if (!chartSeries.length) {
+          setHasChartSeriesData(false);
+        } else {
+          setHasChartSeriesData(true);
+        }
+
         if (isMounted && document.getElementById('chart1')) {
           Highcharts.chart('chart1', columnChart);
         }
@@ -106,6 +114,13 @@ const Chart = () => {
             <CircularProgress />
           </div>
         )}
+
+        {!isLoading && !hasChartSeriesData && (
+          <div className="flex h-full items-center justify-center">
+            <Typography>No chart data available</Typography>
+          </div>
+        )}
+
         <div className="chart-container" id="chart1"></div>
       </div>
     </div>
